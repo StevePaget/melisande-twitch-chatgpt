@@ -8,6 +8,12 @@ const GPT_MODE = process.env.GPT_MODE
 
 let file_context = "You are a helpful Twitch Chatbot."
 
+String.prototype.encodeHTML = function () {
+  return this.replace(/[\u0080-\u024F]/g, 
+          function (v) {return '&#'+v.charCodeAt()+';';}
+         );
+}
+
 const messages = [
   {role: "system", content: "You are a helpful Twitch Chatbot."}
 ];
@@ -85,7 +91,7 @@ app.get('/gpt/:text', async (req, res) => {
         let agent_response = response.data.choices[0].message.content
 
         console.log ("Agent answer: " + agent_response)
-        console.log ("encoded: " + escape(agent_response))
+        console.log ("encoded: " + agent_response.encodeHTML())
         messages.push({role: "assistant", content: agent_response})
 
         //Check for Twitch max. chat message length limit and slice if needed
