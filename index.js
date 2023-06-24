@@ -94,7 +94,7 @@ app.get('/gpt/:text', async (req, res) => {
           console.log ("Sliced agent answer: " + agent_response)
         }
 
-        res.send("<meta charset='UTF-8'>" + agent_response)
+        res.send(encodeURI(agent_response))
       } else {
         res.send("Something went wrong. Try again later!")
       }
