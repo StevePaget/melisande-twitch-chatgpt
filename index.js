@@ -8,12 +8,6 @@ const GPT_MODE = process.env.GPT_MODE
 
 let file_context = "You are a helpful Twitch Chatbot."
 
-String.prototype.encodeHTML = function () {
-  return this.replace(/[\u0080-\uFFFFF]/g, 
-          function (v) {return '&#'+v.charCodeAt()+';';}
-         );
-}
-
 const messages = [
   {role: "system", content: "You are a helpful Twitch Chatbot."}
 ];
