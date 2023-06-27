@@ -85,7 +85,6 @@ app.get('/gpt/:text', async (req, res) => {
         let agent_response = response.data.choices[0].message.content
 
         console.log ("Agent answer: " + agent_response)
-        console.log ("encoded: " + JSON.stringify(agent_response))
         messages.push({role: "assistant", content: agent_response})
 
         //Check for Twitch max. chat message length limit and slice if needed
@@ -95,7 +94,7 @@ app.get('/gpt/:text', async (req, res) => {
           console.log ("Sliced agent answer: " + agent_response)
         }
 
-        res.send(JSON.stringify(agent_response))
+        res.send(agent_response)
       } else {
         res.send("Something went wrong. Try again later!")
       }
